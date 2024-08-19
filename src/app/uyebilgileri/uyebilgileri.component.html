@@ -1,0 +1,90 @@
+
+<style>
+
+.qr-code-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.qr-code-container img {
+  max-width: 100%;
+  height: auto;
+}
+</style>
+
+<h1 mat-dialog-title>Üye Kaydı</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Ad</mat-label>
+    <input matInput [(ngModel)]="ad" name="ad">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Soyad</mat-label>
+    <input matInput [(ngModel)]="soyad" name="soyad">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Başlangıç Tarihi</mat-label>
+    <input matInput [matDatepicker]="baslangicPicker" [(ngModel)]="baslangictarihi" placeholder="GG.AA.YYYY" name="baslangictarihi">
+    <mat-datepicker-toggle matSuffix [for]="baslangicPicker"></mat-datepicker-toggle>
+    <mat-datepicker #baslangicPicker></mat-datepicker>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Bitiş Tarihi</mat-label>
+    <input matInput [matDatepicker]="bitisPicker" [(ngModel)]="bitistarihi" placeholder="GG.AA.YYYY" name="bitistarihi">
+    <mat-datepicker-toggle matSuffix [for]="bitisPicker"></mat-datepicker-toggle>
+    <mat-datepicker #bitisPicker></mat-datepicker>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Doğum Tarihi</mat-label>
+    <input matInput [matDatepicker]="dogumPicker" [(ngModel)]="dogumtarihi" placeholder="GG.AA.YYYY" name="dogumtarihi">
+    <mat-datepicker-toggle matSuffix [for]="dogumPicker"></mat-datepicker-toggle>
+    <mat-datepicker #dogumPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Meslek</mat-label>
+    <input matInput [(ngModel)]="meslek" name="meslek">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Cep Telefonu</mat-label>
+    <input matInput [(ngModel)]="ceptelefonu" name="ceptelefonu">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Özel Durum</mat-label>
+    <input matInput [(ngModel)]="ozeldurum" name="ozeldurum">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Kan Grubu</mat-label>
+    <input matInput [(ngModel)]="kangrubu" name="kangrubu">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Cinsiyet</mat-label>
+    <input matInput [(ngModel)]="cinsiyet" name="cinsiyet">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Branş</mat-label>
+    <input matInput [(ngModel)]="brans" name="brans">
+  </mat-form-field>
+  <div *ngIf="qrCode" class="qr-code-container">
+    <h3>QR Kod</h3>
+    <img [src]="qrCode" alt="QR Code">
+  </div>
+
+  <br>
+  {{yazi}}
+</div>
+<br>
+<div mat-dialog-actions>
+  <button mat-button (click)="iptal()">İptal</button>
+  <button mat-button color="primary" (click)="guncelle()">Kaydet</button>
+  <button mat-button (click)="dondurma()">Üyelik Dondur</button>
+</div>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Center Gym</title>
+    <style>
+        body {
+            background-color: aqua;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .govde {
+            text-align: center;
+            padding-bottom: 120px;
+            
+            
+        }
+        .giris {
+            display: inline-block;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+            padding-bottom:  30px;
+            
+        }
+        .girismat {
+            display: block;
+            margin-bottom: 15px;
+        }
+        mat-tab-group {
+            display: flex;
+            justify-content: center;
+        }
+        mat-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .form-container mat-form-field {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .form-container button {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="govde">
+        <h1 style="text-align: center; padding-top: 80px;">LIFE CENTER</h1>
+        <div class="giris">
+           <mat-tab-group>
+            <mat-tab label="Giriş">
+              <div class="form-container">
+                <mat-form-field>
+                    <mat-label>Kullanıcı Adı</mat-label>
+                    <input matInput type="text" [(ngModel)]="kullaniciadi">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Şifre</mat-label>
+                    <input matInput type="password" [(ngModel)]="sifre">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="kullanicisifrekontrol()">Giriş</button>
+                <br>
+                {{yeniyazi}}
+              </div>
+            </mat-tab>
+            <mat-tab label="Kayıt">
+              <div class="form-container">
+                <mat-form-field>
+                    <mat-label>Kullanıcı Adı</mat-label>
+                    <input matInput type="text" [(ngModel)]="kayitkullaniciadi">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Salon Adı</mat-label>
+                    <input matInput type="text" [(ngModel)]="salonadi">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" [(ngModel)]="email">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Şifre</mat-label>
+                    <input matInput type="password" [(ngModel)]="kayitsifre">
+                </mat-form-field>
+                
+                <button mat-raised-button color="primary" (click)="kayitol()">Kayıt Ol</button>
+                <br>
+              {{kayitmesaji}}
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+    </div>
+</body>
+</html>

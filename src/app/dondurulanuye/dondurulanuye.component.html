@@ -1,0 +1,32 @@
+
+<h2 mat-dialog-title>Üye Dondurma</h2>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Ad</mat-label>
+    <input matInput [value]="ad" disabled>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Soyad</mat-label>
+    <input matInput [value]="soyad" disabled>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Başlangıç Tarihi</mat-label>
+    <input matInput [matDatepicker]="baslangicPicker" [(ngModel)]="baslangicTarihi">
+    <mat-datepicker-toggle matSuffix [for]="baslangicPicker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #baslangicPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Bitiş Tarihi</mat-label>
+    <input matInput [matDatepicker]="bitisPicker" [(ngModel)]="bitisTarihi">
+    <mat-datepicker-toggle matSuffix [for]="bitisPicker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #bitisPicker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="iptal()">İptal</button>
+  <button mat-button (click)="kaydet()">Kaydet</button>
+</div>

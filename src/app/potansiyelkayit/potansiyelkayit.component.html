@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Potansiyel Üye Kaydı</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Ad</mat-label>
+    <input matInput [(ngModel)]="potansiyelUye.ad" name="ad">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Soyad</mat-label>
+    <input matInput [(ngModel)]="potansiyelUye.soyad" name="soyad">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Telefon</mat-label>
+    <input matInput [(ngModel)]="potansiyelUye.telefon" name="telefon">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">İptal</button>
+  <button mat-button color="primary" (click)="kaydetPersonel()">Kaydet</button>
+  {{hatayazisi}}
+</div>

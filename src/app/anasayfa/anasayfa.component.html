@@ -1,0 +1,252 @@
+@if (!kullaniciadi) {
+  <p>Lütfen giriş yapınız</p>
+} @else {
+  <style>
+    body {
+      background-color: aqua;
+    }
+
+    .tab-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    mat-tab-group {
+      width: 80%;
+      background-color: white;
+    }
+  </style>
+
+  <body>
+    <div class="background">
+      <div class="tab-container">
+        <mat-tab-group>
+          <!-- Üyeler Tab -->
+          <mat-tab label="Üyeler">
+            <mat-toolbar>
+              <button mat-raised-button (click)="uyekayit()">Üye Ekle</button>
+              <button mat-raised-button (click)="cikis()">Çıkış</button>
+            </mat-toolbar>
+            <mat-form-field appearance="outline">
+              <mat-label>Arama</mat-label>
+              <input matInput (keyup)="applyFilter($event, 'uye')">
+            </mat-form-field>
+            <table mat-table [dataSource]="listefiltre">
+              <!-- Ad Kolonu -->
+              <ng-container matColumnDef="ad">
+                <th mat-header-cell *matHeaderCellDef> Ad </th>
+                <td mat-cell *matCellDef="let element"> {{element.ad}} </td>
+              </ng-container>
+
+              <!-- Soyad Kolonu -->
+              <ng-container matColumnDef="soyad">
+                <th mat-header-cell *matHeaderCellDef> Soyad </th>
+                <td mat-cell *matCellDef="let element"> {{element.soyad}} </td>
+              </ng-container>
+
+              <!-- Son Tarih Kolonu -->
+              <ng-container matColumnDef="sonTarih">
+                <th mat-header-cell *matHeaderCellDef> Son Tarih </th>
+                <td mat-cell *matCellDef="let element"> {{element.sontarih}} </td>
+              </ng-container>
+
+              <!-- Kayıt Tarihi Kolonu -->
+              <ng-container matColumnDef="kayitTarih">
+                <th mat-header-cell *matHeaderCellDef> Kayıt Tarihi </th>
+                <td mat-cell *matCellDef="let element"> {{element.kayittarih}} </td>
+              </ng-container>
+
+              <!-- Detaylar Kolonu -->
+              <ng-container matColumnDef="detaylar">
+                <th mat-header-cell *matHeaderCellDef> Detaylar </th>
+                <td mat-cell *matCellDef="let element">
+                  <button mat-raised-button (click)="detaylar(element.id)">Detaylar</button>
+                </td>
+              </ng-container>
+
+              <!-- Header ve Row Tanımları -->
+              <tr mat-header-row *matHeaderRowDef="uyeDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: uyeDisplayedColumns;"></tr>
+            </table>
+          </mat-tab>
+
+          <!-- Potansiyel Üyeler Tab -->
+          <mat-tab label="Potansiyel Üyeler">
+            <mat-toolbar>
+              <button mat-raised-button (click)="potansiyelUyekayit()">Potansiyel Üye Ekle</button>
+              <button mat-raised-button (click)="cikis()">Çıkış</button>
+            </mat-toolbar>
+            <mat-form-field appearance="outline">
+              <mat-label>Arama</mat-label>
+              <input matInput (keyup)="applyFilter($event, 'potansiyel')">
+            </mat-form-field>
+            <table mat-table [dataSource]="potansiyellistefiltre">
+              <!-- Ad Kolonu -->
+              <ng-container matColumnDef="ad">
+                <th mat-header-cell *matHeaderCellDef> Ad </th>
+                <td mat-cell *matCellDef="let element"> {{element.ad}} </td>
+              </ng-container>
+
+              <!-- Soyad Kolonu -->
+              <ng-container matColumnDef="soyad">
+                <th mat-header-cell *matHeaderCellDef> Soyad </th>
+                <td mat-cell *matCellDef="let element"> {{element.soyad}} </td>
+              </ng-container>
+
+              <!-- Telefon Kolonu -->
+              <ng-container matColumnDef="telefon">
+                <th mat-header-cell *matHeaderCellDef> Telefon </th>
+                <td mat-cell *matCellDef="let element"> {{element.telefon}} </td>
+              </ng-container>
+
+              <!-- Header ve Row Tanımları -->
+              <tr mat-header-row *matHeaderRowDef="potansiyelDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: potansiyelDisplayedColumns;"></tr>
+            </table>
+          </mat-tab>
+
+          <!-- Personeller Tab -->
+          <mat-tab label="Personeller">
+            <mat-toolbar>
+              <button mat-raised-button (click)="personelkaydet()">Personel Ekle</button>
+              <button mat-raised-button (click)="cikis()">Çıkış</button>
+            </mat-toolbar>
+            <mat-form-field appearance="outline">
+              <mat-label>Arama</mat-label>
+              <input matInput (keyup)="applyFilter($event, 'personel')">
+            </mat-form-field>
+            <table mat-table [dataSource]="personellistefiltre">
+              <!-- Ad Kolonu -->
+              <ng-container matColumnDef="ad">
+                <th mat-header-cell *matHeaderCellDef> Ad </th>
+                <td mat-cell *matCellDef="let element"> {{element.ad}} </td>
+              </ng-container>
+
+              <!-- Soyad Kolonu -->
+              <ng-container matColumnDef="soyad">
+                <th mat-header-cell *matHeaderCellDef> Soyad </th>
+                <td mat-cell *matCellDef="let element"> {{element.soyad}} </td>
+              </ng-container>
+
+              <!-- Telefon Kolonu -->
+              <ng-container matColumnDef="telefon">
+                <th mat-header-cell *matHeaderCellDef> Telefon </th>
+                <td mat-cell *matCellDef="let element"> {{element.telefon}} </td>
+              </ng-container>
+
+              <!-- Branş Kolonu -->
+              <ng-container matColumnDef="brans">
+                <th mat-header-cell *matHeaderCellDef> Branş </th>
+                <td mat-cell *matCellDef="let element"> {{element.brans}} </td>
+              </ng-container>
+
+              <!-- Header ve Row Tanımları -->
+              <tr mat-header-row *matHeaderRowDef="personelkolon"></tr>
+              <tr mat-row *matRowDef="let row; columns: personelkolon;"></tr>
+            </table>
+          </mat-tab>
+
+          <!-- Dondurulan Üyeler Tab -->
+          <mat-tab label="Dondurulan Üyeler">
+            <mat-toolbar>
+              <button mat-raised-button (click)="cikis()">Çıkış</button>
+            </mat-toolbar>
+            <mat-form-field appearance="outline">
+              <mat-label>Arama</mat-label>
+              <input matInput (keyup)="applyFilter($event, 'dondurulan')">
+            </mat-form-field>
+            <table mat-table [dataSource]="dondurulanlistefiltre">
+              <!-- Ad Kolonu -->
+              <ng-container matColumnDef="ad">
+                <th mat-header-cell *matHeaderCellDef> Ad </th>
+                <td mat-cell *matCellDef="let element"> {{element.uye_ad}} </td>
+              </ng-container>
+
+              <!-- Soyad Kolonu -->
+              <ng-container matColumnDef="soyad">
+                <th mat-header-cell *matHeaderCellDef> Soyad </th>
+                <td mat-cell *matCellDef="let element"> {{element.uye_soyad}} </td>
+              </ng-container>
+
+              <!-- Dondurma Başlangıç Kolonu -->
+              <ng-container matColumnDef="dondurmaBaslangic">
+                <th mat-header-cell *matHeaderCellDef> Dondurma Başlangıç </th>
+                <td mat-cell *matCellDef="let element"> {{element.dondurmaBaslangic}} </td>
+              </ng-container>
+
+              <!-- Dondurma Bitiş Kolonu -->
+              <ng-container matColumnDef="dondurmaBitis">
+                <th mat-header-cell *matHeaderCellDef> Dondurma Bitiş </th>
+                <td mat-cell *matCellDef="let element"> {{element.dondurmaBitis}} </td>
+              </ng-container>
+
+              <!-- Header ve Row Tanımları -->
+              <tr mat-header-row *matHeaderRowDef="dondurulanDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: dondurulanDisplayedColumns;"></tr>
+            </table>
+          </mat-tab>
+
+          <!-- Paketler Tab -->
+          <mat-tab label="Paketler">
+            <mat-toolbar>
+              <button mat-raised-button (click)="paketkaydet()">Paket Kaydet</button>
+              <button mat-raised-button (click)="cikis()">Çıkış</button>
+            </mat-toolbar>
+            <mat-form-field appearance="outline">
+              <mat-label>Arama</mat-label>
+              <input matInput (keyup)="applyFilter($event, 'paketler')">
+            </mat-form-field>
+            <table mat-table [dataSource]="paketlerFiltre">
+              <!-- Paket Adı Kolonu -->
+              <ng-container matColumnDef="paketadi">
+                <th mat-header-cell *matHeaderCellDef> Paket Adı </th>
+                <td mat-cell *matCellDef="let element"> {{element.paketadi}} </td>
+              </ng-container>
+
+              <!-- Fiyat Kolonu -->
+              <ng-container matColumnDef="fiyat">
+                <th mat-header-cell *matHeaderCellDef> Fiyat </th>
+                <td mat-cell *matCellDef="let element"> {{element.fiyat}} </td>
+              </ng-container>
+
+              <!-- Dondurma Hakkı Kolonu -->
+              <ng-container matColumnDef="dondurmahakki">
+                <th mat-header-cell *matHeaderCellDef> Dondurma Hakkı </th>
+                <td mat-cell *matCellDef="let element"> {{element.dondurmahakki}} </td>
+              </ng-container>
+
+              <!-- Header ve Row Tanımları -->
+              <tr mat-header-row *matHeaderRowDef="paketlerkolon"></tr>
+              <tr mat-row *matRowDef="let row; columns: paketlerkolon;"></tr>
+            </table>
+          </mat-tab>
+          <mat-tab label="Salon Bilgileri">
+            <div style="padding: 16px;">
+              <!-- Spor salonu adresi girişi -->
+              <mat-form-field appearance="fill">
+                <mat-label>Spor Salonu Adresi</mat-label>
+                <input matInput placeholder="Adres giriniz" [(ngModel)]="address">
+              </mat-form-field>
+        
+              <!-- Bağlantı girişi -->
+              <mat-form-field appearance="fill">
+                <mat-label>Bağlantı</mat-label>
+                <input matInput placeholder="URL giriniz" [(ngModel)]="link">
+              </mat-form-field>
+        
+              <!-- GET ve POST seçenekleri -->
+              <mat-form-field appearance="fill">
+                <mat-label>İşlem Türü</mat-label>
+                <mat-select [(value)]="selectedOption">
+                  <mat-option value="get">GET</mat-option>
+                  <mat-option value="post">POST</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-tab>
+          
+        </mat-tab-group>
+      </div>
+    </div>
+  </body>
+}

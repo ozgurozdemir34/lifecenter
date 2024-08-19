@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Paket Kaydı</h1>
+<div mat-dialog-content>
+  <form #paketForm="ngForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Paket Adı</mat-label>
+      <input matInput [(ngModel)]="paketKayit.paketadi" name="paketadi" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Fiyat</mat-label>
+      <input matInput type="number" [(ngModel)]="paketKayit.fiyat" name="fiyat" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Dondurma Hakkı</mat-label>
+      <input matInput type="number" [(ngModel)]="paketKayit.dondurmahakki" name="dondurmahakki" required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">İptal</button>
+  <button mat-raised-button color="primary" [disabled]="!paketForm.valid" (click)="kaydetPaket()">Kaydet</button>
+</div>
+
